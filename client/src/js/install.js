@@ -1,3 +1,4 @@
+const butInstall = document.getElementById("buttonInstall");
 // TODO: Add an event handler to the `beforeinstallprompt` event
 let deferredPrompt;
 

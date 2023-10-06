@@ -64,9 +64,9 @@ The following image shows the application.
 
 **Note**: This image is a screen shot once I finished the assignment.
 
-![Social-Network-API]()
-![Social-Network-API]()
-![Social-Network-API]()
+![PWA_Text_Editor](../PWA_Text_Editor/assets/Screenshot%202023-10-06%20143701.png)
+![PWA_Text_Editor](../PWA_Text_Editor/assets/Screenshot%202023-10-06%20143759.png)
+
 
 
 ## Credits

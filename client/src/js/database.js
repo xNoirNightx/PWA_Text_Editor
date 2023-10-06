@@ -32,8 +32,19 @@ export const putDb = async (content) => {
 
 // Retrieve the header text from the database
 export const getDb = async () => {
-  const db = await initdb();
-  const tx = db.transaction('jate', 'readonly');
-  const store = tx.objectStore('jate');
-  return store.get(1).then((result) => (result ? result.content : null)); // Retrieve content with key 1 (header text)
+  try {
+    const db = await initdb();
+    const tx = db.transaction('jate', 'readonly');
+    const store = tx.objectStore('jate');
+    const result = await store.get(1);
+    if (result) {
+      return result.content;
+    } else {
+      console.error('Data not found in IndexedDB.');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error while retrieving data from IndexedDB:', error);
+    return null;
+  }
 };

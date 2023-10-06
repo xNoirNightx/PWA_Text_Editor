@@ -12,18 +12,28 @@ const initdb = async () =>
     },
   });
 
-// TODO: Add logic to a method that accepts some content and adds it to the database
+
+  // Clear the existing data in the object store
+export const clearDb = async () => {
+  const db = await initdb();
+  const tx = db.transaction('jate', 'readwrite');
+  const store = tx.objectStore('jate');
+  await store.clear(); // Clear all existing data in the object store to stop errors
+
+};
+// Store the header text in the database
 export const putDb = async (content) => {
   const db = await initdb();
   const tx = db.transaction('jate', 'readwrite');
   const store = tx.objectStore('jate');
+  await store.clear(); // Clear all existing data in the object store
   await store.add({ content });
 };
 
-// TODO: Add logic for a method that gets all the content from the database
+// Retrieve the header text from the database
 export const getDb = async () => {
   const db = await initdb();
   const tx = db.transaction('jate', 'readonly');
   const store = tx.objectStore('jate');
-  return store.getAll();
+  return store.get(1).then((result) => (result ? result.content : null)); // Retrieve content with key 1 (header text)
 };

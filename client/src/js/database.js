@@ -26,7 +26,8 @@ export const putDb = async (content) => {
   const db = await initdb();
   const tx = db.transaction('jate', 'readwrite');
   const store = tx.objectStore('jate');
-  await store.clear(); // Clear all existing data in the object store
+  console.log('Adding content to IndexedDB:', content); // Add this line for debugging
+  await store.clear();
   await store.add({ content });
 };
 
@@ -36,13 +37,7 @@ export const getDb = async () => {
     const db = await initdb();
     const tx = db.transaction('jate', 'readonly');
     const store = tx.objectStore('jate');
-    const result = await store.get(1);
-    if (result) {
-      return result.content;
-    } else {
-      console.error('Data not found in IndexedDB.');
-      return null;
-    }
+    return store.get(1);
   } catch (error) {
     console.error('Error while retrieving data from IndexedDB:', error);
     return null;
